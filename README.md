@@ -19,6 +19,7 @@ Key strategic documents, market positioning, go-to-market plans
 - `RALLY_MASTER_LIST.md` — Comprehensive action list and decisions
 - `ARCHITECTURE_PIVOT.md` — Platform consolidation plan (Tao as the backend)
 - `TOMORROW.md` — Week 1 action plan (LinkedIn posts, launch tasks)
+- `ADVISOR_PLAYBOOK.md` — PE/fund pitch deck (co-op network, unit economics, roadmap) — Week 1 action plan (LinkedIn posts, launch tasks)
 
 ### `/operations` — Day-to-Day Operations
 Integration notes, sync logs, operational memory
