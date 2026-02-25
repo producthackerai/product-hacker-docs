@@ -483,3 +483,105 @@ Co-op mode is controlled per shared workspace via the **Settings tab** (gear ico
 - Workspace names are NEVER shared between co-op participants
 - Only resolved profile data is shared (no internal IDs, notes, or deal values)
 - Contributing workspaces are tracked internally for attribution but not exposed to consumers
+
+<!-- AUTO:TOOLS_START -->
+## Available Tools (auto-generated)
+
+*49 tools across 11 plugins. Generated 2026-02-25.*
+
+### Alerts Tools (alerts-tools)
+- **crm_check_alerts** — Fetch the user's recent notifications and activity alerts. Shows unread mentions, broadcasts, blog posts, and CRM activity. Use when the user says "/alerts", "what did I miss", "any notifications", "w
+
+### Calendar Tools (calendar-tools)
+- **calendar_list_events** — List events from the user's Google Calendar. Defaults to the next 7 days. Returns event summaries, times, attendees, and links.
+- **calendar_get_event** — Get detailed information about a single calendar event by its ID.
+- **calendar_create_event** — Create a new Google Calendar event. Can add CRM contacts as attendees by resolving their email addresses. Logs an interaction for linked CRM contacts.
+- **calendar_update_event** — Update an existing calendar event. Can modify title, time, description, location, or attendees.
+- **calendar_delete_event** — Delete (cancel) a calendar event. Sends cancellation notifications to attendees.
+- **calendar_suggest_blocks** — Analyze the user's calendar and CRM pipeline to suggest time blocks for the day. Returns existing events, free slots, and AI-suggested activities (meetings, focus time, follow-ups). Use when the user 
+
+### ContactOut Enrichment (contactout-tools)
+- **crm_contactout_enrich** — Enrich an existing CRM contact with verified emails and phone numbers from ContactOut. Use when the user asks for "verified email", "real email", "ContactOut lookup", or when web search enrichment did
+- **crm_contactout_decision_makers** — Find decision makers at a company by domain using ContactOut. Use when the user asks "who are the decision makers at X", "find the CTO at X", "key people at X". Max 50 results per call. Costs credits.
+
+### Context Tools (context-tools)
+- **crm_get_my_profile** — Read the current user's business profile and personal context. Returns company name, industry, sales style, strengths, weaknesses, and other business info the user has shared. Use this when the user a
+- **crm_update_my_profile** — Save or update the user's business profile. Merge-updates fields — only specified fields are changed. Use this proactively when the user shares business information about themselves (company, industry
+- **crm_get_context** — Read the current workspace's context — ICP, sales process, competitive advantages, playbooks, strategy, etc. For shared workspaces, this is team-level context visible on the Context tab. Use when the 
+- **crm_update_context** — Update the workspace context. Merge-updates fields — only specified fields are changed. Use when the user shares context like ICP, sales process, competitive advantages, playbooks, or any freeform not
+
+### Rally CRM Tools (crm-tools)
+- **crm_create_contact** — Create a new CRM contact. Use when the user mentions adding a person to the CRM, or pastes contact details. IMPORTANT: Include ALL known fields — title, companyName, email, etc. If you found data via 
+- **crm_create_company** — Create a new CRM company record. Use when the user mentions adding a company or organization.
+- **crm_list_contacts** — Search and list CRM contacts. The system prompt only shows a small sample — ALWAYS use this tool when the user asks about specific contacts, asks "how many", asks to find someone, or needs a complete 
+- **crm_list_companies** — Search and list CRM companies. The system prompt only shows a small sample — ALWAYS use this tool when the user asks about specific companies or needs a complete view. Supports search across ALL compa
+- **crm_update_contact** — Update a CRM contact. Use when the user wants to change a contact's stage, add notes, update deal value, etc. IMPORTANT: Also use this tool to save any enrichment data you find via web search — always
+- **crm_update_company** — Update a CRM company record.
+- **crm_enrich_contact** — Enrich a CRM contact via web search. Looks up the person online and fills in missing data (title, company, LinkedIn, etc.). Use when the user says "enrich", "look up", or "find info about" a contact.
+- **crm_enrich_company** — Enrich a CRM company via web search. Looks up company data online (industry, size, domain, funding, etc.).
+- **crm_enrich_company_by_domain** — Look up a company by domain name, create it if it doesn't exist, and enrich it via web search. Use when the user gives you a company domain or website URL and wants company data. Returns fully enriche
+- **crm_submit_feature_request** — Submit a feature request for Rally. Use when the user asks for a new feature, suggests an improvement, or says "I wish it could..." or "Can you add...".
+- **crm_import_url** — Import a contact from a LinkedIn URL or website. Parses the URL to extract name, company, title, and creates a contact record. Use when the user pastes a LinkedIn URL. IMPORTANT: If you already know t
+- **crm_trace** — Show the full provenance/source history of a contact or company. Displays which sources contributed data for each field, which value "won" via waterfall resolution, and all alternate values. Use when 
+- **crm_company_sync** — Sync companies for all contacts that have a company_name but no linked company record. Creates missing companies and links them. Use when the user asks to sync companies, create missing companies, or 
+- **crm_score_contacts** — Score contacts using the FREE heuristic algorithm (no LLM cost). Supports configurable scoring profiles for different use cases.
+
+Built-in profiles:
+- "default" — Balanced: completeness + pipeline + d
+
+### Feed Tools (feed-tools)
+- **crm_get_activities** — Fetch personalized local activity and event suggestions for the user based on their location and preferences. Returns cached suggestions (refreshed weekly). Use when the user says "/activities", "what
+- **crm_get_updates** — Fetch curated trending content recommendations (articles, podcasts, videos, tools) personalized to the user. Returns cached suggestions (refreshed weekly). Use when the user says "/updates", "what's t
+
+### Gmail Tools (gmail-tools)
+- **gmail_search** — Search the user's Gmail inbox using Gmail query syntax (e.g. "from:john subject:proposal", "is:unread newer_than:7d"). Returns message metadata without full body.
+- **gmail_get_email** — Read the full content of a specific email by its message ID. Returns headers, body text, and labels.
+- **gmail_extract_contacts** — Scan recent emails to find unique contacts the user has been emailing. Returns deduplicated list sorted by frequency. Filters out the user's own email. Use when the user asks "who have I been emailing
+- **gmail_find_emails_for_contact** — Find emails related to a CRM contact. Looks up the contact's email/name from the CRM, then searches Gmail for matching messages.
+- **gmail_lookup_email** — Find someone's email address by searching Gmail for messages they sent or received. Use this when a CRM contact has no email, or when the user asks to email someone and you don't have their address. O
+- **gmail_send_email** — Send an email from the user's connected Gmail account. Can send new emails or reply to existing threads. Auto-creates a CRM contact for the recipient if one doesn't exist. IMPORTANT: Always show the u
+
+### Artifact List Tools (list-tools)
+- **crm_get_list** — Retrieve a saved artifact list by ID to view its contents or prepare updates. Use when the user references a specific list or asks to see/modify list data.
+- **crm_create_list** — Create a spreadsheet-style artifact list. Use when the user asks for a list, table, report, or "artifact". Returns a saved list that the user can view, filter, and edit in the Lists tab.
+
+IMPORTANT: R
+- **crm_update_list_rows** — Update rows in an existing artifact list. Use when the user asks to modify, add to, or update data in a saved list.
+
+Use cases:
+- "Update contact fields from CRM" — re-fetch CRM data and update matchi
+- **crm_enrich_list_rows** — Enrich rows in a saved artifact list. Uses the same enrichment services available elsewhere in the CRM (web search, CRM contact/company enrichment, Gmail lookup).
+
+Use when the user asks to:
+- "Enrich
+- **crm_search_lists** — Search and browse saved artifact lists. Use when the user asks "show my lists", "what lists do I have", "my most recent list", "find the list about X", etc. Returns list metadata (not full row data — 
+
+### Rally PE Deal Sourcing Tools (pe-tools)
+- **pe_risk_score** — Assess investment risk for a target company. Searches the web for risk signals (declining headcount, lawsuits, negative news, customer concentration, key person risk, regulatory exposure) and returns 
+- **pe_propensity_to_sell** — Estimate how likely a company or founder is to sell. Analyzes CEO age/career stage, company maturity, funding timeline, investor pressure, market timing, and personal signals. Returns a propensity sco
+
+### Recurring Tools (recurring-tools)
+- **recurring_create** — Create a new recurring item (habit, routine, or recurring task). Returns the created task.
+- **recurring_list** — List recurring items with progress and streak information. Use filter "due_today" to see only items due now, or "all" for everything.
+- **recurring_complete** — Mark a recurring item as complete for the current period. Appends a completion timestamp.
+- **recurring_update** — Update a recurring item's schedule or title. Only specified fields are changed.
+
+### Public Share Link Tools (share-tools)
+- **crm_create_share_link** — Create a public share link for a CRM entity (contact, company, list, or pipeline). Returns a URL that anyone can view without signing in. Links expire after 30 days by default.
+- **crm_list_share_links** — List all active public share links for the current workspace.
+- **crm_revoke_share_link** — Revoke (deactivate) a public share link so it can no longer be accessed.
+
+### Scoring Profiles
+- **enterprise-sales** — Enterprise Sales
+- **startup-outbound** — Startup Outbound
+- **relationship-focused** — Relationship-Focused
+- **pe-sourcing** — PE Deal Sourcing
+
+### Modes
+- **work** (GTM) — 2 stages, 6 plays
+- **personal** (Personal) — 2 stages, 4 plays
+- **network** (Network) — 2 stages, 5 plays
+- **tribe** (Tribe) — 2 stages, 4 plays
+- **pe** (PE) — 2 stages, 6 plays
+
+<!-- AUTO:TOOLS_END -->
