@@ -8,4 +8,4 @@
 Ship Rally Terminal CLI — full-featured command-line CRM/GTM tool with AI chat, contact management, CRM plays, email drafting, CSV import, and workspace switching.
 
 ---
-*Last synced: 2026-02-24*
+*Last synced: 2026-02-25*

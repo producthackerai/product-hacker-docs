@@ -8,4 +8,4 @@
 Goals with sub-goals, auto-progress calculation, and clear visual hierarchy.
 
 ---
-*Last synced: 2026-02-24*
+*Last synced: 2026-02-25*
