@@ -3,6 +3,9 @@
 **Context:** Full competitive + strategic analysis of Rally investor pitch
 **Authors:** Jody + Claude Code (deep analysis), Cam (operator response)
 
+**Pitch Deck v2:** Live at `rally.producthacker.ai/#deckv2` (super_admin only)
+**Pitch Deck v1:** Still live at `rally.producthacker.ai/#deck` (super_admin only)
+
 ---
 
 ## Executive Summary
