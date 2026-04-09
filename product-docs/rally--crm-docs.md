@@ -471,23 +471,10 @@ View model trace in the UI: click any field's source badge to see all sources in
 ### Investment Thesis
 The fund's investment thesis is stored in the **Context tab** (Brain icon) under workspace strategy. The AI agent references it when screening targets, scoring contacts, and evaluating thesis fit. Fields include: sector focus, geographic focus, revenue range, deal size range, growth profile, margin profile, ideal attributes, and dealbreakers.
 
-## Co-Op Mode
-
-### Overview
-Shared workspaces can enable **Co-Op Mode** to contribute and consume data from a shared Rally DB backbone. When enabled, CRM writes are synced to a central Rally DB, and enrichment can pull from data contributed by other workspaces.
-
-### Toggle
-Co-op mode is controlled per shared workspace via the **Settings tab** (gear icon) → Rally Co-op section. The `product-hacker` workspace has co-op enabled by default.
-
-### Privacy
-- Workspace names are NEVER shared between co-op participants
-- Only resolved profile data is shared (no internal IDs, notes, or deal values)
-- Contributing workspaces are tracked internally for attribution but not exposed to consumers
-
 <!-- AUTO:TOOLS_START -->
 ## Available Tools (auto-generated)
 
-*49 tools across 11 plugins. Generated 2026-02-25.*
+*110 tools across 25 plugins. Generated 2026-03-25.*
 
 ### Alerts Tools (alerts-tools)
 - **crm_check_alerts** — Fetch the user's recent notifications and activity alerts. Shows unread mentions, broadcasts, blog posts, and CRM activity. Use when the user says "/alerts", "what did I miss", "any notifications", "w
@@ -500,6 +487,11 @@ Co-op mode is controlled per shared workspace via the **Settings tab** (gear ico
 - **calendar_delete_event** — Delete (cancel) a calendar event. Sends cancellation notifications to attendees.
 - **calendar_suggest_blocks** — Analyze the user's calendar and CRM pipeline to suggest time blocks for the day. Returns existing events, free slots, and AI-suggested activities (meetings, focus time, follow-ups). Use when the user 
 
+### Compound Tools (compound-tools)
+- **crm_batch_create_tasks** — Create multiple tasks in a single call. Each task gets a unique sequential ID. Optionally link all tasks to a goal.
+- **crm_create_goal_with_tasks** — Create a goal with tasks and optional documents in a single call. This is the recommended way to set up new initiatives — avoids orphan goals and partial failures. All entities are created atomically.
+- **crm_setup_workspace** — Initialize or configure a workspace with strategy, goals, and tasks in one call. Use this for onboarding new workspaces or reconfiguring existing ones. Sets workspace strategy/context, creates initial
+
 ### ContactOut Enrichment (contactout-tools)
 - **crm_contactout_enrich** — Enrich an existing CRM contact with verified emails and phone numbers from ContactOut. Use when the user asks for "verified email", "real email", "ContactOut lookup", or when web search enrichment did
 - **crm_contactout_decision_makers** — Find decision makers at a company by domain using ContactOut. Use when the user asks "who are the decision makers at X", "find the CTO at X", "key people at X". Max 50 results per call. Costs credits.
@@ -509,6 +501,8 @@ Co-op mode is controlled per shared workspace via the **Settings tab** (gear ico
 - **crm_update_my_profile** — Save or update the user's business profile. Merge-updates fields — only specified fields are changed. Use this proactively when the user shares business information about themselves (company, industry
 - **crm_get_context** — Read the current workspace's context — ICP, sales process, competitive advantages, playbooks, strategy, etc. For shared workspaces, this is team-level context visible on the Context tab. Use when the 
 - **crm_update_context** — Update the workspace context. Merge-updates fields — only specified fields are changed. Use when the user shares context like ICP, sales process, competitive advantages, playbooks, or any freeform not
+- **crm_get_branding** — Read the agent/workspace branding profile — logo, headshot, brokerage info, license, bio, tagline, testimonials, awards, service areas, social links, and Rally Pages config. Use when the user asks abo
+- **crm_update_branding** — Update the agent/workspace branding profile. Merge-updates — only specified fields are changed. Use when the user shares branding info: bio, tagline, headshot, brokerage details, testimonials, awards,
 
 ### Rally CRM Tools (crm-tools)
 - **crm_create_contact** — Create a new CRM contact. Use when the user mentions adding a person to the CRM, or pastes contact details. IMPORTANT: Include ALL known fields — title, companyName, email, etc. If you found data via 
@@ -524,10 +518,29 @@ Co-op mode is controlled per shared workspace via the **Settings tab** (gear ico
 - **crm_import_url** — Import a contact from a LinkedIn URL or website. Parses the URL to extract name, company, title, and creates a contact record. Use when the user pastes a LinkedIn URL. IMPORTANT: If you already know t
 - **crm_trace** — Show the full provenance/source history of a contact or company. Displays which sources contributed data for each field, which value "won" via waterfall resolution, and all alternate values. Use when 
 - **crm_company_sync** — Sync companies for all contacts that have a company_name but no linked company record. Creates missing companies and links them. Use when the user asks to sync companies, create missing companies, or 
+- **crm_set_always_on** — Star/favorite a contact or company so they appear in every briefing and standup. Use when users say "star", "favorite", "VIP", "always tell me about", "mark as important".
+- **crm_archive_contact** — Archive (soft-delete) a contact or company to hide it from all views, standups, and briefings. The record is NOT deleted — it can be unarchived later. Use when users say "archive", "hide", "remove fro
 - **crm_score_contacts** — Score contacts using the FREE heuristic algorithm (no LLM cost). Supports configurable scoring profiles for different use cases.
 
 Built-in profiles:
 - "default" — Balanced: completeness + pipeline + d
+
+### Deal Pipeline Tools (deal-tools)
+- **crm_create_deal** — Submit a new deal to the pipeline. Starts at "inbound" stage.
+- **crm_list_deals** — List deals in the pipeline. Optionally filter by stage.
+- **crm_update_deal** — Update a deal. Use action "advance" to move to next stage, "pass" to reject, or "backburner" to put on hold.
+
+### Document Tools (document-tools)
+- **crm_create_document** — Create a new markdown document. Optionally link to an entity (contact, company, deal, goal).
+- **crm_list_documents** — List documents for the current workspace. Optionally filter by linked entity.
+- **crm_get_document** — Get a document with its full content by ID.
+
+### Activity Dump (dump-tools)
+- **crm_activity_dump** — Parse an unstructured activity update and apply CRM changes automatically. Use this when the user gives a casual update like "Had coffee with Sarah from TechCorp, talked about their Series A" or "Emai
+
+### Email Tools (email-tools)
+- **email_check_domain** — Check a domain's email infrastructure — MX records, SPF/DKIM/DMARC, provider detection (including security gateway + underlying mailbox), catch-all status, deliverability score, and full marketing int
+- **email_validate_address** — Validate an email address — checks syntax, domain MX records, disposable domain status, role-based detection, provider intelligence, and generates a full deliverability report with marketing tips. Use
 
 ### Feed Tools (feed-tools)
 - **crm_get_activities** — Fetch personalized local activity and event suggestions for the user based on their location and preferences. Returns cached suggestions (refreshed weekly). Use when the user says "/activities", "what
@@ -540,6 +553,12 @@ Built-in profiles:
 - **gmail_find_emails_for_contact** — Find emails related to a CRM contact. Looks up the contact's email/name from the CRM, then searches Gmail for matching messages.
 - **gmail_lookup_email** — Find someone's email address by searching Gmail for messages they sent or received. Use this when a CRM contact has no email, or when the user asks to email someone and you don't have their address. O
 - **gmail_send_email** — Send an email from the user's connected Gmail account. Can send new emails or reply to existing threads. Auto-creates a CRM contact for the recipient if one doesn't exist. IMPORTANT: Always show the u
+
+### Goal Tools (goal-tools)
+- **crm_list_goals** — List goals/initiatives for the current workspace. Optionally filter by status.
+- **crm_update_goal** — Update an existing goal. Use this to change status, priority, description, or target date.
+- **get_referenced_content** — Get the content of a referenced entity (doc, goal, list, contact, company). Returns markdown for docs/goals, CSV for lists, summary for contacts/companies.
+- **crm_create_goal** — Create a new goal/initiative.
 
 ### Artifact List Tools (list-tools)
 - **crm_get_list** — Retrieve a saved artifact list by ID to view its contents or prepare updates. Use when the user references a specific list or asks to see/modify list data.
@@ -556,9 +575,36 @@ Use when the user asks to:
 - "Enrich
 - **crm_search_lists** — Search and browse saved artifact lists. Use when the user asks "show my lists", "what lists do I have", "my most recent list", "find the list about X", etc. Returns list metadata (not full row data — 
 
+### Meeting Notes Tools (meeting-notes-tools)
+- **crm_create_meeting_note** — Create a meeting note linked to a company and/or contacts. Use after a call or meeting to capture notes, action items, and context. Can also be used to save pasted transcripts.
+- **crm_list_meeting_notes** — List meeting notes. Filter by company, contact, or event. Returns notes sorted by event date (most recent first).
+- **crm_get_meeting_note** — Get a meeting note with full content by ID.
+- **crm_update_meeting_note** — Update a meeting note — add content, change company/contact links, add summary.
+- **crm_sync_calendar_companies** — Scan recent and upcoming calendar events, find attendee emails with business domains, and ensure contacts and companies exist in the CRM. Creates missing contacts/companies and links them. Returns a s
+
+### Workspace Member Management (member-tools)
+- **crm_list_members** — List all members of the current workspace with their roles and join dates.
+- **crm_get_member** — Get details for a specific workspace member by user ID or email.
+- **crm_add_member** — Add a new member to the current workspace. Requires owner role.
+- **crm_update_member_role** — Change a workspace member's role. Requires owner role.
+- **crm_remove_member** — Remove a member from the current workspace. Requires owner role. Cannot remove the last owner.
+
+### Network Updates Tools (network-tools)
+- **crm_network_updates** — Generate a summary of recent network activity — recent emails and upcoming calendar events involving the user's top CRM contacts. Returns per-contact updates and an AI-synthesized summary. Use when th
+
 ### Rally PE Deal Sourcing Tools (pe-tools)
 - **pe_risk_score** — Assess investment risk for a target company. Searches the web for risk signals (declining headcount, lawsuits, negative news, customer concentration, key person risk, regulatory exposure) and returns 
 - **pe_propensity_to_sell** — Estimate how likely a company or founder is to sell. Analyzes CEO age/career stage, company maturity, funding timeline, investor pressure, market timing, and personal signals. Returns a propensity sco
+
+### Rally Real Estate Tools (realestate-tools)
+- **re_create_listing** — Create a new property listing. Use when the user says "add a listing", "new listing at", "list this property", or provides property details like address + price.
+- **re_list_listings** — Search and filter property listings. Use when the user asks "show me my listings", "active listings", "what's pending", "listings in [area]", or wants a listings overview.
+- **re_get_listing** — Get full details for a specific listing by ID. Use when discussing a specific property.
+- **re_update_listing** — Update a listing — change price, status, dates, details, or add notes. Use for "price reduction", "mark as pending", "update closing date", etc.
+- **re_create_target** — Create a target property to watch for changes. Use when the user says "watch this property", "alert me if anything happens at", "set up alerts for", "track this address".
+- **re_list_targets** — List all watched target properties and their alert status. Use when user asks "what am I watching?", "my target properties", "saved searches".
+- **re_check_alerts** — Check for property alerts — price changes, status changes, new listings matching criteria. Use when user asks "any alerts?", "what changed?", "new activity?".
+- **re_set_always_on** — Mark a contact as "always-on" — they'll be mentioned in every briefing and alert. Use for VIP clients, key referral sources, and active deal parties. Use when user says "always tell me about [name]", 
 
 ### Recurring Tools (recurring-tools)
 - **recurring_create** — Create a new recurring item (habit, routine, or recurring task). Returns the created task.
@@ -571,11 +617,42 @@ Use when the user asks to:
 - **crm_list_share_links** — List all active public share links for the current workspace.
 - **crm_revoke_share_link** — Revoke (deactivate) a public share link so it can no longer be accessed.
 
+### SMS & iMessage Tools (sms-tools)
+- **sms_search_messages** — Search imported SMS and iMessage conversations. Use this when the user asks about text messages, SMS history, or iMessage conversations with a contact. Supports searching by text content, contact ID, 
+- **sms_get_conversation** — Get a summary of the SMS/iMessage conversation with a specific CRM contact. Shows message count, first/last message dates, inbound vs outbound breakdown, and the 20 most recent messages. Use this when
+- **sms_log_interaction** — Log an SMS or iMessage interaction for a CRM contact. Use this when the user pastes a text conversation or tells you about a text exchange they had. Creates an interaction record attached to the conta
+- **sms_import_stats** — Get statistics about imported SMS/iMessage data for this workspace. Shows total messages, how many are linked to CRM contacts, and unique conversation count. Use this when the user asks about their me
+
+### Task Tools (task-tools)
+- **crm_create_task** — Create a one-time task. For recurring habits/routines, use recurring_create instead.
+- **crm_list_tasks** — List one-time tasks. Excludes recurring items. Optionally filter by status or linked goal.
+- **crm_update_task** — Update a one-time task. Set status to "done" to complete it.
+
+### Tribe Calendar Tools (tribe-calendar-tools)
+- **tribe_create_events** — Create one or more events on the workspace shared calendar. Use this when users paste screenshots of schedules, text from emails, or describe events to add. Parse ALL events from the input — extract d
+- **tribe_list_events** — List events from the workspace shared calendar. Shows upcoming events by default.
+- **tribe_update_event** — Update an existing workspace calendar event — change time, title, description, location, volunteer status, etc.
+- **tribe_claim_event** — Claim/volunteer for a workspace calendar event. The current user signs up for the event.
+- **tribe_unclaim_event** — Remove yourself from a claimed/volunteered event.
+
+### Rally Venture Deal Sourcing Tools (venture-tools)
+- **vc_scan_signals** — Scan the WEB (not Twitter/X) for venture-relevant founding signals in a sector or theme. Searches news sites, Crunchbase, ProductHunt, LinkedIn, job boards, patent databases, and accelerator announcem
+- **vc_evaluate_company** — Quick screen evaluation of a company for venture investment. Generates thesis fit score, market size estimate, competitive position, founder assessment, and red flags. Use when user says "/evaluate [c
+- **vc_founder_research** — Deep research on a founder — career history, previous companies/exits, domain expertise, network, public presence, and what people say about them. Use when user says "/founder [name]", "research found
+- **vc_generate_memo** — Draft a structured investment memo for partner review. Covers company overview, market opportunity, product, business model, traction, team, competition, risks, deal terms, and recommendation. Use whe
+- **vc_market_landscape** — Map the competitive landscape for a sector — key players, funding levels, market dynamics, recent M&A, technology trends, and white space opportunities. Use when user says "/landscape [sector]", "map 
+- **vc_portfolio_pulse** — Check on portfolio companies for recent news, hiring signals, traction indicators, and network intel. Also surfaces any signals from portfolio founder networks about new founders or companies. Use whe
+- **vc_thesis_score** — Score a company against the fund's investment thesis. Returns a structured scorecard with dimension-level scores (thesis fit, founder quality, market timing, signal strength, network proximity) and ov
+- **vc_partner_promotion** — Analyst-to-partner promotion workflow. Takes a company (found by analyst, signal, or direct) and produces a full partner-ready package: deep research report, standardized proposal document, and a draf
+- **vc_x_signal_scan** — Scan TWITTER/X SPECIFICALLY for investment-relevant tweets, threads, and people. Only use this when the user explicitly mentions Twitter or X. For general signal scanning ("scan for signals", "run sig
+- **vc_track_signal** — Log a signal or tip from a network contact. Captures the source, signal description, strength assessment, and suggested follow-up. Creates or updates contacts/companies as needed. Use when user says "
+
 ### Scoring Profiles
 - **enterprise-sales** — Enterprise Sales
 - **startup-outbound** — Startup Outbound
 - **relationship-focused** — Relationship-Focused
 - **pe-sourcing** — PE Deal Sourcing
+- **real-estate** — Real Estate Agent
 
 ### Modes
 - **work** (GTM) — 2 stages, 6 plays
@@ -583,5 +660,11 @@ Use when the user asks to:
 - **network** (Network) — 2 stages, 5 plays
 - **tribe** (Tribe) — 2 stages, 4 plays
 - **pe** (PE) — 2 stages, 6 plays
+- **salesops** (SalesOps) — 2 stages, 6 plays
+- **roadmap** (Roadmap) — 2 stages, 6 plays
+- **realEstate** (Real Estate) — 2 stages, 8 plays
+- **crumble** () — 2 stages, 6 plays
+- **ninetyNineProof** (99C) — 2 stages, 6 plays
+- **venture** (Venture) — 2 stages, 9 plays
 
 <!-- AUTO:TOOLS_END -->
