@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><style>
+  /* UK business card 85x55mm + 3mm bleed = 91x61mm per page */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  @page { size: 91mm 61mm; margin:0; }
+  .page { width:91mm; height:61mm; position:relative; overflow:hidden;
+          background:#0f172a; color:#fff;
+          font-family:-apple-system, "Helvetica Neue", sans-serif;
+          page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+  .glow { position:absolute; width:70mm; height:70mm; border-radius:50%;
+          background:radial-gradient(circle, rgba(34,211,238,0.16) 0%, rgba(34,211,238,0) 65%);
+          top:-30mm; right:-25mm; }
+  .glow2 { position:absolute; width:60mm; height:60mm; border-radius:50%;
+          background:radial-gradient(circle, rgba(34,211,238,0.10) 0%, rgba(34,211,238,0) 65%);
+          bottom:-28mm; left:-22mm; }
+  /* safe area: 6mm in from bleed edge */
+  .safe { position:absolute; top:6mm; left:6mm; right:6mm; bottom:6mm; }
+
+  .chip { width:9.5mm; height:9.5mm; border-radius:2.2mm; background:#1e293b;
+          border:0.5mm solid #22d3ee; display:flex; align-items:center; justify-content:center; }
+  .chip span { color:#22d3ee; font-weight:800; font-size:4.6mm; letter-spacing:-0.1mm; }
+
+  .front .name { margin-top:7.5mm; font-size:7.2mm; font-weight:750; letter-spacing:-0.15mm; }
+  .front .role { margin-top:1.2mm; font-size:3.0mm; font-weight:600; color:#22d3ee;
+                 text-transform:uppercase; letter-spacing:0.55mm; white-space:nowrap; }
+  .front .contact { position:absolute; bottom:0; left:0;
+                    font-family:"SF Mono", Menlo, monospace; font-size:2.9mm; line-height:1.75;
+                    color:#cbd5e1; }
+  .front .contact b { color:#fff; font-weight:600; }
+  .front .contact .at { color:#22d3ee; }
+
+  .back { display:flex; align-items:center; justify-content:center; }
+  .back .inner { text-align:center; }
+  .back .cmd { font-family:"SF Mono", Menlo, monospace; font-size:5.6mm; font-weight:700; color:#fff; }
+  .back .cmd .p { color:#22d3ee; }
+  .back .cmd .cursor { display:inline-block; width:2.8mm; height:5.2mm; background:#22d3ee;
+                       vertical-align:-0.7mm; margin-left:1mm; }
+  .back .tag { margin-top:4mm; font-size:2.7mm; color:#94a3b8; letter-spacing:0.15mm; white-space:nowrap; }
+  .back .url { margin-top:5.5mm; font-family:"SF Mono", Menlo, monospace;
+               font-size:3.6mm; color:#22d3ee; font-weight:600; letter-spacing:0.2mm; }
+</style></head><body>
+
+<div class="page front">
+  <div class="glow"></div>
+  <div class="safe">
+    <div class="chip"><span>PH</span></div>
+    <div class="name">Jody Roberts</div>
+    <div class="role">Co-Founder · Product Hacker</div>
+    <div class="contact">
+      <b>jody<span class="at">@</span>producthacker.ai</b><br>
+      producthacker.ai<br>
+      +1 704 501 7240
+    </div>
+  </div>
+</div>
+
+<div class="page back">
+  <div class="glow2"></div>
+  <div class="inner">
+    <div class="cmd"><span class="p">$</span> product hacker<span class="cursor"></span></div>
+    <div class="tag">AI-native tools &nbsp;·&nbsp; 2 founders &nbsp;·&nbsp; 0 VC &nbsp;·&nbsp; 9+ live apps</div>
+    <div class="url">producthacker.ai</div>
+  </div>
+</div>
+
+</body></html>

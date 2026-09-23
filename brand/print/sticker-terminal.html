@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><style>
+  /* Rounded-rect die-cut sticker: trim 90x54mm + 3mm bleed = 96x60mm */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  @page { size: 96mm 60mm; margin:0; }
+  body { width:96mm; height:60mm; overflow:hidden; background:#0f172a;
+         font-family:"SF Mono", Menlo, monospace; position:relative; }
+  .titlebar { height:9mm; background:#1e293b; display:flex; align-items:center;
+              padding:0 5mm; gap:2.2mm; }
+  .dot { width:3.1mm; height:3.1mm; border-radius:50%; }
+  .r { background:#ff5f57; } .y { background:#febc2e; } .g { background:#28c840; }
+  .title { flex:1; text-align:center; color:#64748b; font-size:2.7mm; padding-right:14mm; }
+  .body { padding:5mm 7mm 0 7mm; }
+  .ln { font-size:3.4mm; line-height:1.9; }
+  .muted { color:#94a3b8; }
+  .prompt { color:#22d3ee; font-weight:700; }
+  .out { color:#ffffff; font-weight:800; font-size:8.6mm; letter-spacing:-0.2mm;
+         margin:0.5mm 0 1.5mm 0; font-family:-apple-system, "Helvetica Neue", sans-serif; }
+  .out .hack { color:#22d3ee; }
+  .cmd2 { color:#e2e8f0; font-size:3.4mm; }
+  .cmd2 .flag { color:#22d3ee; }
+  .cursor { display:inline-block; width:2.2mm; height:3.6mm; background:#22d3ee; vertical-align:-0.5mm; }
+  .url { position:absolute; bottom:4.5mm; right:7mm; color:#22d3ee;
+         font-size:3.2mm; font-weight:700; letter-spacing:0.15mm; }
+</style></head><body>
+  <div class="titlebar">
+    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+    <div class="title">producthacker.ai — zsh</div>
+  </div>
+  <div class="body">
+    <div class="ln"><span class="prompt">$</span> <span class="muted">whoami</span></div>
+    <div class="out">PRODUCT <span class="hack">HACKER</span></div>
+    <div class="ln cmd2"><span class="prompt">$</span> ship <span class="flag">--daily</span> <span class="flag">--with</span> agents <span class="cursor"></span></div>
+  </div>
+  <div class="url">producthacker.ai</div>
+</body></html>
